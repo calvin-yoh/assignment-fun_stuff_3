@@ -22,6 +22,7 @@ The input will then be separated into classes and structures shown in the diagra
 First, referring to the diagram : R'Shell reads in from the input/instruction file. However there are many classes that build into the input class and we will discuss that in the following list.
 1. Special Characters
 	1. '#' (comment)
+		* Testing
 	1. $ (command prompt)
 1. Connector
 	1. ;
