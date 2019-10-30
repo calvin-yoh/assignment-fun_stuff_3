@@ -14,7 +14,7 @@ The input will then be separated into classes and structures shown in the diagra
 
 
 # Diagram
-https://github.com/cs100/assignment-fun_stuff/blob/master/images/Assignment%201.png?raw=true
+![Diagram](https://github.com/cs100/assignment-fun_stuff/blob/master/images/Assignment%201.png?raw=true)
 
 
 
