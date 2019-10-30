@@ -51,8 +51,23 @@ First, referring to the diagram : R'Shell reads in from the input/instruction fi
 
 # Prototypes/Research
 Will use prototypes as a base to create more complicated function
+Build off waitpid, execvp, and fork functions
+
 
 
 
 # Development and Testing Roadmap
-
+1. Command Prompt Symbol
+	 https://github.com/cs100/assignment-fun_stuff/issues/2
+1. Argument List
+	https://github.com/cs100/assignment-fun_stuff/issues/7
+1. Executable
+	https://github.com/cs100/assignment-fun_stuff/issues/5 
+1. Connectors
+	https://github.com/cs100/assignment-fun_stuff/issues/1
+1. SysCalls
+	https://github.com/cs100/assignment-fun_stuff/issues/3
+1. Exit Call
+	https://github.com/cs100/assignment-fun_stuff/issues/4
+1. Comment Symbol
+	https://github.com/cs100/assignment-fun_stuff/issues/6
