@@ -1,5 +1,5 @@
 # CS 100 Programming Project
-* Spring Quarter, 2019
+* Fall Quarter, 2019
 * Calvin Yoh, 862088713
 * Alex Kevakian, 861302910
 
