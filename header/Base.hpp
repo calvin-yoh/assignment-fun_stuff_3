@@ -10,6 +10,7 @@ class Base{
 	Base* left;
 	Base* right;
 	vector<Base*> baseVect;
+	vector<string> 
 	virtual void execute() = 0;
 };
 

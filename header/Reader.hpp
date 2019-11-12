@@ -12,8 +12,9 @@ using namespace std;
 
 class Reader
 {
-	private: 
-		void splitString(const vect<char>input, vect<char> output);
+	private:
+		void checkPrio(const char check, int& returnValue);
+		void splitString(const string input, vector<string>& output);
 		
 	public:
 		void readInput(string input);
