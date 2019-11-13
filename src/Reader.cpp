@@ -102,7 +102,7 @@ void Reader::splitString(const string vect, vector<string>& output)
 	
 }
 
-void Reader::execute(char* input[])
+void Reader::execute(char* input[], int& status)
 {	
 		pid_t pid = fork();
 		if(pid == -1)
@@ -111,12 +111,13 @@ void Reader::execute(char* input[])
 		}
 		else if(pid == 0)
 		{
+			status = 0;
 			if(execvp(input[0], input) == -1)
 			{
 				perror("exec");
 			}	
-		}		
-		else if(pid > 0)
+		}else		
+		if(pid > 0)
 		{
 			if(wait(0) == -1)
 			{	
@@ -129,7 +130,7 @@ void Reader::execute(char* input[])
 
 void Reader::readInput(string input)
 {
-	int status = 0;
+	int status = 1;
 	vector<string> argv;
 	splitString(input, argv);
 	int countArgs = 0;
@@ -155,16 +156,37 @@ void Reader::readInput(string input)
 			}
 		if(countArgs == 1)
                 {
-                        execute(argsOne);
+                        execute(argsOne, status);
 			cout << "called  countArgsOne" << endl;
                 }else if(countArgs == 2)
                 {
-                        execute(argsTwo);
+                        execute(argsTwo, status);
 			cout << "called countArgsTwo" << endl;
                 }
 
-		i += countArgs;
-		
+		if(countArgs + i != argv.size() && argv.at(countArgs + i) == "||")
+                {
+                        if(status != 0)
+                        {
+                                while(countArgs + i + 1 != argv.size() && (argv.at(countArgs + i + 1) != ";" || argv.at(countArgs + i + 1) != "&&" || argv.at(countArgs + i + 1) != "||"))
+                                {
+                                        i++;
+                                }
+                        }
+                }else if(countArgs + i != argv.size() && argv.at(countArgs + i) == "&&")
+                {
+                        if(status == 0)
+                        {
+				while(countArgs + i + 1 != argv.size() && (argv.at(countArgs + i + 1) != ";" || argv.at(countArgs + i + 1) != "&&" || argv.at(countArgs + i + 1) != "||"))
+                                {
+                                        i++;
+                                }
+
+                        }
+
+                }
+                i += countArgs;
+	//	cout << status << end;
 	}
 }
 
