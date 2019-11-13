@@ -1,6 +1,3 @@
 #!/bin/sh
 
-echo "echo cars"
-echo trucks
-echo cars && --q
-echo trucks || --q
+../bin/main <exit_command_tests.txt
