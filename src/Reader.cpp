@@ -62,16 +62,23 @@ void Reader::splitString(const string vect, vector<string>& output)
 					word = "";
 				}	
 				break;
-			case 3: 
-				output.push_back(word);
+			case 3:
+				if(word != "")
+				{ 
+					output.push_back(word);
+				}		
 				word = "";
 				break;
 			case 4: 
-				if(vect.at(i+1) == ' ');
+				if(i != vect.size() -1)
 				{
-					i++;					
+					if(vect.at(i+1) == ' ')
+					{
+						i+= 2;	
+						word = '#';				
+					}
 				}
-				while(vect.at(i) != ' ' || i != vect.size() - 2)
+				while(i != vect.size() && vect.at(i) != ' ')
 				{
 					word = word + vect.at(i);
 					i++;
@@ -101,7 +108,7 @@ void Reader::readInput(string input)
 	vector<char> comment;
 	for(int i = 0; i < argv.size(); i++)
 	{
-		cout << argv.at(i) << " ";
+		cout << "box " << i << " = " << argv.at(i) << endl;
 	}
 }
 
