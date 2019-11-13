@@ -2,7 +2,11 @@
 #include <vector>
 #include <string>
 #include <iostream>
-
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <sys/wait.h>
+#include <sys/types.h>
 
 using namespace std;
 
@@ -98,17 +102,69 @@ void Reader::splitString(const string vect, vector<string>& output)
 	
 }
 
+void Reader::execute(char* input[])
+{	
+		pid_t pid = fork();
+		if(pid == -1)
+		{
+			perror("fork");
+		}
+		else if(pid == 0)
+		{
+			if(execvp(input[0], input) == -1)
+			{
+				perror("exec");
+			}	
+		}		
+		else if(pid > 0)
+		{
+			if(wait(0) == -1)
+			{	
+				perror("wait failed");
+			}
+		}
+}
+
+
 
 void Reader::readInput(string input)
 {
-
+	int status = 0;
 	vector<string> argv;
 	splitString(input, argv);
-
-	vector<char> comment;
+	int countArgs = 0;
+	char* argsOne[2];
+	char* argsTwo[3];
+	argsOne[1] = NULL;
+	argsTwo[2] = NULL;
 	for(int i = 0; i < argv.size(); i++)
 	{
-		cout << "box " << i << " = " << argv.at(i) << endl;
+		countArgs = 0;
+		while(countArgs + i != argv.size() && (argv.at(countArgs + i) != ";" && argv.at(countArgs + i) != "&&" && argv.at(countArgs + i) != "||" && argv.at(countArgs + i).at(0)  != '#'))
+                        {
+                                countArgs++;
+                        }
+		if(countArgs == 1)
+                        {
+                                argsOne[0] = (char*)argv.at(i).c_str();
+                       		
+                        }else if(countArgs == 2)
+                        {
+                                argsTwo[0] = (char*)argv.at(i).c_str();
+                                argsTwo[1] = (char*)argv.at(i+1).c_str();
+			}
+		if(countArgs == 1)
+                {
+                        execute(argsOne);
+			cout << "called  countArgsOne" << endl;
+                }else if(countArgs == 2)
+                {
+                        execute(argsTwo);
+			cout << "called countArgsTwo" << endl;
+                }
+
+		i += countArgs;
+		
 	}
 }
 

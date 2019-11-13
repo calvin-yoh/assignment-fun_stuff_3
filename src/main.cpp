@@ -16,6 +16,10 @@ int main()
 	
 		cout << "$";
 		getline(cin, input);
+		if(input == "--q")
+		{
+			break;
+		}
 		reader->readInput(input);
 	}while(input != "--q");	
 
