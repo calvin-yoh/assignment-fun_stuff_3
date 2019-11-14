@@ -112,6 +112,7 @@ void Reader::execute(char* input[], int& status)
 		else if(pid == 0)
 		{
 			status = 0;
+			this->working = false;
 			if(execvp(input[0], input) == -1)
 			{
 				perror("exec");
@@ -157,11 +158,11 @@ void Reader::readInput(string input)
 		if(countArgs == 1)
                 {
                         execute(argsOne, status);
-			cout << "called  countArgsOne" << endl;
+			//cout << "called  countArgsOne" << endl;
                 }else if(countArgs == 2)
                 {
                         execute(argsTwo, status);
-			cout << "called countArgsTwo" << endl;
+			//cout << "called countArgsTwo" << endl;
                 }
 
 		if(countArgs + i != argv.size() && argv.at(countArgs + i) == "||")
@@ -189,4 +190,12 @@ void Reader::readInput(string input)
 	//	cout << status << end;
 	}
 }
+
+bool Reader::doInput(string input)
+{
+	readInput(input);
+	return this->working;
+}
+
+
 

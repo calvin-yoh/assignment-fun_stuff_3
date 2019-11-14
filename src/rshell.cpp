@@ -11,17 +11,17 @@ int main()
 	string input;
 	do
 	{
-		Reader* reader = new Reader;
 
+		Reader* reader = new Reader;
 	
 		cout << "$";
 		getline(cin, input);
-		if(input == "--q")
+		if(input == "--q" || input == "exit")
 		{
 			break;
 		}
 		reader->readInput(input);
-	}while(input != "--q");	
+	}while(input != "--q" && input != "exit");	
 
 	return 0;
 }
