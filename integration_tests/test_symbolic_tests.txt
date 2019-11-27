@@ -1,0 +1,13 @@
+#!/bin/sh
+
+[ -e tests ]
+test -f tests
+([ test -f tests ] || echo bikes)
+([ test -f tests ] && echo bikes)
+[ -d tests ]
+[ -f main.cpp ]
+[ main.cpp ]
+[ -f main.cpp ] && ls
+echo cars || [ -f main.cpp ]
+test trucks && test -d main.cpp
+-q                       
