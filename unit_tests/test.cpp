@@ -70,7 +70,7 @@ TEST(TESTTEN, FALSETEST) {
         string input = "hello";
         EXPECT_EQ(reader->doInput(input), true);
 
-
+}
 TEST(TESTELEVEN, TESTLITERALTEST) {
         Reader* reader = new Reader;
         string input = "test -e Reader.cpp";
