@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <sys/wait.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 
 using namespace std;
 
@@ -127,6 +128,37 @@ void Reader::execute(char* input[], int& status)
 		}
 }
 
+void Reader::testExecute(const char* path, string flag, int& status)
+{
+	struct stat buf;
+	stat(path, &buf);
+	if(flag == "-d")
+	{
+		if(S_ISDIR(buf.st_mode))
+		{
+			cout << "(True)" << endl;
+			status = 1;	
+		}
+		else
+		{
+			cout << "(False)" << endl;
+			status = 0;
+		}
+	}	
+	else
+	{
+		if(S_ISREG(buf.st_mode))
+		{
+			cout << "(True)" << endl;
+			status = 1;
+		}
+		 else
+                {
+                        cout << "(False)" << endl;
+			status = 0;                
+		}
+	}
+}
 
 
 void Reader::readInput(string input)
@@ -139,9 +171,33 @@ void Reader::readInput(string input)
 	char* argsTwo[3];
 	argsOne[1] = NULL;
 	argsTwo[2] = NULL;
+	string flag;
+	int countTest = 0;
 	for(int i = 0; i < argv.size(); i++)
 	{
 		countArgs = 0;
+		countTest = 0;
+		if(argv.at(i) == "test" || argv.at(i) == "[")
+		{
+			if(argv.at(i) == "[")
+			{
+				countTest = 1;
+			}
+			i++;
+			if(i < argv.size() && (argv.at(i) == "-e" || (argv.at(i) == "-d" || (argv.at(i) == "-f"))))
+			{
+				flag = argv.at(i);
+				i++;
+			}
+			else
+			{
+				flag = "-e";
+			}
+			testExecute(argv.at(i).c_str(), flag, status);
+			i++;
+			i += countTest;		
+			goto mylabel;
+		} 
 		while(countArgs + i != argv.size() && (argv.at(countArgs + i) != ";" && argv.at(countArgs + i) != "&&" && argv.at(countArgs + i) != "||" && argv.at(countArgs + i).at(0)  != '#'))
                         {
                                 countArgs++;
@@ -164,7 +220,7 @@ void Reader::readInput(string input)
                         execute(argsTwo, status);
 			//cout << "called countArgsTwo" << endl;
                 }
-
+		mylabel: 
 		if(countArgs + i != argv.size() && argv.at(countArgs + i) == "||")
                 {
                         if(status != 0)

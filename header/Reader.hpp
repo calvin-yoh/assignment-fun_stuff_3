@@ -16,6 +16,7 @@ class Reader
 		void checkPrio(const char check, int& returnValue);
 		void splitString(const string input, vector<string>& output);
 		void execute(char* input[], int& status);
+		void testExecute(const char* path, string flag, int& status);
 		bool working = true;
 		
 	public:
