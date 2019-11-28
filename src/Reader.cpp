@@ -160,12 +160,33 @@ void Reader::testExecute(const char* path, string flag, int& status)
 	}
 }
 
+void Reader::removePar(vector<string>& input)
+{
+	for(int i = 0; i < input.size(); i++)
+	{
+		int x = 0;
+
+		while(x < input.at(i).size())
+		{
+   			if(input.at(i).at(x) == '(' || input.at(i).at(x) == ')')
+    			{
+        			input.at(i).erase(x,1);
+    			}
+    			else
+			{
+				x++;
+			}
+		}
+	}
+}
+
 
 void Reader::readInput(string input)
 {
 	int status = 1;
 	vector<string> argv;
 	splitString(input, argv);
+	removePar(argv);
 	int countArgs = 0;
 	char* argsOne[2];
 	char* argsTwo[3];
