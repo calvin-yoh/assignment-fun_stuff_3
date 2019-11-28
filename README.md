@@ -26,6 +26,10 @@ First, referring to the diagram : R'Shell reads in from the input/instruction fi
 		* This will make anything that appears after this symbol a comment and it will not execute.
 	1. $ (command prompt) 
 		* Prints everytime to make sure that our commands can be recognized
+	1. " (quotes)
+		* anything between these special characters will be treated as one whole class object 
+	1. (
+		* Can be used to prioritize certain calls and change the order that the shell will execute the commands
 1. Connector
 	1. ;
 		* Terminating connector
@@ -47,6 +51,8 @@ First, referring to the diagram : R'Shell reads in from the input/instruction fi
 			* A call that replaces the current running process with a new process. This particular command will allow the new process to not run the same program the parent process did
 		1. Waitpid
 			* A call that will suspend more calling processes until a child process ends or is stopped
+		1. Stat
+			* A call used to check to see if a path is exists. Can be used with IS_REG or IS_DIR to complete this task with more detail
 	
 
 
