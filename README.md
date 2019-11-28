@@ -29,7 +29,7 @@ First, referring to the diagram : R'Shell reads in from the input/instruction fi
 	1. " (quotes)
 		* anything between these special characters will be treated as one whole class object 
 	1. (
-		* Can be used to prioritze certain calls and change the order that the shell will execute the commands
+		* Can be used to prioritize certain calls and change the order that the shell will execute the commands
 1. Connector
 	1. ;
 		* Terminating connector
